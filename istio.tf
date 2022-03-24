@@ -83,7 +83,7 @@ module "namespace_istio_system" {
 }
 
 module "wildcard_certificate" {
-  source = "git::https://gitlab.k8s.cloud.statcan.ca/cloudnative/terraform/modules/terraform-kubernetes-cert-manager-certificate.git?ref=v1.0.1"
+  source = "git::https://github.com/statcan/terraform-kubernetes-cert-manager-certificate.git?ref=v1.0.1"
 
   name      = "wildcard"
   namespace = kubernetes_namespace.istio_system.id
@@ -101,7 +101,7 @@ module "wildcard_certificate" {
 }
 
 module "istio_operator" {
-  source = "git::https://gitlab.k8s.cloud.statcan.ca/cloudnative/terraform/modules/terraform-kubernetes-istio-operator.git?ref=restructure"
+  source = "git::https://github.com/statcan/terraform-kubernetes-istio-operator.git?ref=restructure"
 
   depends_on = [
     kubernetes_namespace.istio_operator_system
