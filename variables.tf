@@ -77,5 +77,5 @@ variable "additional_istio_ingress_gateways" {
   }))
   description = "Additional Istio Ingress Gateways to create"
 
-  default = []
+  default = {}
 }
