@@ -7,7 +7,7 @@
 resource "helm_release" "istio_ingress_gateway_additional" {
   for_each = var.additional_istio_ingress_gateways
 
-  name      = "${each.value.name}"
+  name      = each.key
   namespace = module.namespace_istio_system.name
 
   repository          = lookup(var.platform_helm_repositories, "istio-ingress-gateway", "https://statcan.github.io/charts")

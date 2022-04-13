@@ -71,8 +71,7 @@ variable "load_balancer_subnet" {
 }
 
 variable "additional_istio_ingress_gateways" {
-  type = list(object({
-    name                    = string
+  type = map(object({
     hosts                   = list(string)
     certificate_secret_name = string
   }))
