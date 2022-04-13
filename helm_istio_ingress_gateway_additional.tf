@@ -43,7 +43,7 @@ https:
   # Toggles HTTPS configurations on the ingress gateway.
   enabled: true
   # The hosts to which the ingress gateway should route traffic to.
-  hosts: "${each.value.hosts}"
+  hosts: "${jsonencode(each.value.hosts)}"
   httpsRedirect: true
   # Configures if HSTS headers should be added to all responses which do not have it.
   hsts:
