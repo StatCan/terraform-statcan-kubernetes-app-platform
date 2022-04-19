@@ -26,7 +26,7 @@ clusterDomain: cluster.local
 
 replicaCount: 2
 image:
-  repository: ${local.repositories.dockerhub}virtualservice-gateway-rename-mutator
+  repository: ${local.repositories.dockerhub}statcan/virtualservice-gateway-rename-mutator
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v1.1.0"
