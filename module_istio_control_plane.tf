@@ -36,7 +36,6 @@ components:
   cni:
     enabled: true
     tag: ${module.istio_operator.tag}
-    namespace: "kube-system"
     k8s:
       tolerations:
       - key: CriticalAddonsOnly
@@ -47,6 +46,7 @@ components:
         operator: Exists
       - key: data.statcan.gc.ca/classification
         operator: Exists
+    namespace: kube-system
   ingressGateways:
     - enabled: false
       name: istio-ingressgateway
@@ -58,55 +58,41 @@ components:
         - name: PILOT_HTTP10
           value: 'true'
       hpaSpec:
-        minReplicas: 3
         maxReplicas: 5
+        minReplicas: 3
   policy:
     enabled: true
     tag: ${module.istio_operator.tag}
     k8s:
+      hpaSpec:
+        maxReplicas: 5
+        minReplicas: 3
       tolerations:
         - key: CriticalAddonsOnly
           operator: Exists
-      hpaSpec:
-        minReplicas: 3
-        maxReplicas: 5
   telemetry:
     enabled: true
     tag: ${module.istio_operator.tag}
     k8s:
+      hpaSpec:
+        maxReplicas: 5
+        minReplicas: 3
       tolerations:
         - key: CriticalAddonsOnly
           operator: Exists
-      hpaSpec:
-        minReplicas: 3
-        maxReplicas: 5
 meshConfig:
-  disablePolicyChecks: false
   enableAutoMtls: true
-  ingressControllerMode: "OFF"
+  ingressControllerMode: 'OFF'
 profile: default
 values:
   gateways:
     istio-ingressgateway:
       k8sIngress: false
       k8sIngressHttps: false
-      sds:
-        enabled: true
   global:
     controlPlaneSecurityEnabled: false
-    disablePolicyChecks: false
     enableTracing: false
-    k8sIngress:
-      enableHttps: false
-      enabled: false
-    mtls:
-      auto: true
-      enabled: true
     policyCheckFailOpen: false
-    outboundTrafficPolicy:
-      mode: ALLOW_ANY
-    sds:
-      enabled: true
   grafana:
     contextPath: /
     enabled: true
@@ -125,12 +111,6 @@ values:
       secretName: ${kubernetes_secret.kiali.metadata[0].name}
       viewOnlyMode: true
     enabled: true
-    ingress:
-      annotations:
-        kubernetes.io/ingress.class: istio
-      enabled: true
-      hosts:
-        - istio-kiali.${var.ingress_domain}
   pilot:
     enableProtocolSniffingForInbound: false
     enableProtocolSniffingForOutbound: false

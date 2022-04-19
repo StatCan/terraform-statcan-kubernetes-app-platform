@@ -15,7 +15,7 @@ resource "helm_release" "istio_ingress_gateway_additional" {
   repository_password = var.platform_helm_repository_password
 
   chart   = "istio-ingress-gateway"
-  version = "2.1.1"
+  version = "2.1.2"
 
   values = [<<EOF
 # Sets the tag of the images to use
