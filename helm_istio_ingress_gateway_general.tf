@@ -65,7 +65,7 @@ https:
       # Can be ClusterIssuer or Issuer.
       kind: ClusterIssuer
       # The name of the Issuer to use.
-      name: letsencrypt
+      name: issuer-letsencrypt
 EOF
   ]
 }
