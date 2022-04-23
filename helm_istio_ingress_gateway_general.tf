@@ -35,8 +35,6 @@ ingressGateway:
     # Defines if an "internal" or "external" Azure load-balancer is deployed for the service.
     azureLoadBalancer: internal
     azureLoadBalancerSubnet: ${var.load_balancer_subnet}
-    # Lets autogenerate the Node Ports.
-    nodePorts: {}
 
 # Configures HTTPS on the ingress gateway.
 https:
