@@ -7,31 +7,12 @@
 
 # This module deploys the IstioOperator resource which the Istio Operator controller watches and acts upon.
 module "istio_operator_istio" {
-  source = "git::https://github.com/canada-ca-terraform-modules/terraform-kubernetes-istio-operator-cr?ref=v1.0.0"
+  source = "git::https://github.com/canada-ca-terraform-modules/terraform-kubernetes-istio-operator-cr.git?ref=v1.0.0"
 
   name      = "istio"
   namespace = module.namespace_istio_system.name
 
   spec = <<EOF
-addonComponents:
-  grafana:
-    enabled: true
-    k8s:
-      tolerations:
-      - key: CriticalAddonsOnly
-        operator: Exists
-  kiali:
-    enabled: true
-    k8s:
-      tolerations:
-      - key: CriticalAddonsOnly
-        operator: Exists
-  prometheus:
-    enabled: true
-    k8s:
-      tolerations:
-      - key: CriticalAddonsOnly
-        operator: Exists
 components:
   cni:
     enabled: true
@@ -60,57 +41,14 @@ components:
       hpaSpec:
         maxReplicas: 5
         minReplicas: 3
-  policy:
-    enabled: true
-    tag: ${module.istio_operator.tag}
-    k8s:
-      hpaSpec:
-        maxReplicas: 5
-        minReplicas: 3
-      tolerations:
-        - key: CriticalAddonsOnly
-          operator: Exists
-  telemetry:
-    enabled: true
-    tag: ${module.istio_operator.tag}
-    k8s:
-      hpaSpec:
-        maxReplicas: 5
-        minReplicas: 3
-      tolerations:
-        - key: CriticalAddonsOnly
-          operator: Exists
 meshConfig:
   enableAutoMtls: true
   ingressControllerMode: 'OFF'
 profile: default
 values:
-  gateways:
-    istio-ingressgateway:
-      k8sIngress: false
-      k8sIngressHttps: false
   global:
-    controlPlaneSecurityEnabled: false
-    enableTracing: false
-    policyCheckFailOpen: false
-  grafana:
-    contextPath: /
-    enabled: true
-    ingress:
-      annotations:
-        kubernetes.io/ingress.class: istio
-      enabled: true
-      hosts:
-        - istio-grafana.${var.ingress_domain}
-  kiali:
-    contextPath: /
-    dashboard:
-      auth:
-        strategy: login
-      grafanaURL: https://istio-grafana.${var.ingress_domain}
-      secretName: ${kubernetes_secret.kiali.metadata[0].name}
-      viewOnlyMode: true
-    enabled: true
+    proxy:
+      holdApplicationUntilProxyStarts: true
   pilot:
     enableProtocolSniffingForInbound: false
     enableProtocolSniffingForOutbound: false
@@ -196,109 +134,4 @@ resource "kubernetes_manifest" "destinationrule_kube_dns" {
       }
     }
   }
-}
-
-# A DestinationRule which allows for Pods on the Mesh to connect to the Grafana service.
-resource "kubernetes_manifest" "destinationrule_istio_grafana" {
-  manifest = {
-    "apiVersion" = "networking.istio.io/v1beta1"
-    "kind"       = "DestinationRule"
-    "metadata" = {
-      "name"      = "grafana"
-      "namespace" = module.namespace_istio_system.name
-    }
-    "spec" = {
-      "host" = "grafana.istio-system.svc.cluster.local"
-      "trafficPolicy" = {
-        "tls" = {
-          "mode" = "DISABLE"
-        }
-      }
-    }
-  }
-}
-
-# An Ingress for Istio's Grafana instance.
-resource "kubernetes_ingress" "istio_grafana" {
-  metadata {
-    name      = "grafana"
-    namespace = kubernetes_namespace.istio_system.metadata.0.name
-  }
-
-  spec {
-    ingress_class_name = "ingress-istio-controller"
-
-    rule {
-      host = "istio-grafana.${var.ingress_domain}"
-      http {
-        path {
-          path = "/*"
-          backend {
-            service_name = "grafana"
-            service_port = "3000"
-          }
-        }
-      }
-    }
-  }
-}
-
-# A DestinationRule which allows for Pods on the Mesh to connect to the Kiali service.
-resource "kubernetes_manifest" "destinationrule_istio_kiali" {
-  manifest = {
-    "apiVersion" = "networking.istio.io/v1beta1"
-    "kind"       = "DestinationRule"
-    "metadata" = {
-      "name"      = "kiali"
-      "namespace" = module.namespace_istio_system.name
-    }
-    "spec" = {
-      "host" = "kiali.istio-system.svc.cluster.local"
-      "trafficPolicy" = {
-        "tls" = {
-          "mode" = "DISABLE"
-        }
-      }
-    }
-  }
-}
-
-# An Ingress for Istio's Kiali instance.
-resource "kubernetes_ingress" "istio_kiali" {
-  metadata {
-    name      = "kiali"
-    namespace = kubernetes_namespace.istio_system.metadata.0.name
-  }
-
-  spec {
-    ingress_class_name = "ingress-istio-controller"
-
-    rule {
-      host = "istio-kiali.${var.ingress_domain}"
-      http {
-        path {
-          path = "/*"
-          backend {
-            service_name = "kiali"
-            service_port = "20001"
-          }
-        }
-      }
-    }
-  }
-}
-
-# A secret for the Kiali login.
-resource "kubernetes_secret" "kiali" {
-  metadata {
-    name      = "kiali"
-    namespace = kubernetes_namespace.istio_system.metadata.0.name
-  }
-
-  data = {
-    username   = "admin"
-    passphrase = "admin"
-  }
-
-  type = "kubernetes.io/opaque"
 }
