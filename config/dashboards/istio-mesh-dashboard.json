@@ -48,7 +48,7 @@
       }
     ]
   },
-  "description": "Istio Mesh Dashboard version 1.8.6",
+  "description": "Istio Mesh Dashboard version 1.10.6",
   "editable": false,
   "gnetId": 7639,
   "graphTooltip": 0,
@@ -101,6 +101,20 @@
       "id": 20,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -181,6 +195,20 @@
       "id": 21,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -262,6 +290,20 @@
       "id": 22,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -343,6 +385,20 @@
       "id": 23,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -424,6 +480,20 @@
       "id": 113,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -506,6 +576,20 @@
       "id": 114,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -588,6 +672,20 @@
       "id": 115,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -670,6 +768,20 @@
       "id": 116,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -752,6 +864,20 @@
       "id": 117,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -834,6 +960,20 @@
       "id": 90,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -916,6 +1056,20 @@
       "id": 91,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -998,6 +1152,20 @@
       "id": 92,
       "interval": null,
       "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
       "mappingType": 1,
       "mappingTypes": [
         {
@@ -1072,7 +1240,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 4,
+        "col": 5,
         "desc": true
       },
       "styles": [
@@ -1089,7 +1257,7 @@
           "link": false,
           "linkTargetBlank": false,
           "linkTooltip": "Workload dashboard",
-          "linkUrl": "/dashboard/db/istio-workload-dashboard?var-namespace=${__cell_2:raw}&var-workload=${__cell_:raw}",
+          "linkUrl": "/dashboard/db/istio-workload-dashboard?var-namespace=${__cell_3:raw}&var-workload=${__cell_2:raw}",
           "pattern": "destination_workload",
           "preserveFormat": false,
           "sanitize": false,
@@ -1313,7 +1481,7 @@
       "scroll": true,
       "showHeader": true,
       "sort": {
-        "col": 2,
+        "col": 5,
         "desc": true
       },
       "styles": [
@@ -1330,7 +1498,7 @@
           "link": false,
           "linkTargetBlank": false,
           "linkTooltip": "$__cell dashboard",
-          "linkUrl": "/dashboard/db/istio-tcp-workload-dashboard?var-namespace=${__cell_2:raw}&&var-workload=${__cell_:raw}",
+          "linkUrl": "/dashboard/db/istio-workload-dashboard?var-namespace=${__cell_3:raw}&var-workload=${__cell_2:raw}",
           "pattern": "destination_workload",
           "preserveFormat": false,
           "sanitize": false,

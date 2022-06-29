@@ -48,7 +48,7 @@
       }
     ]
   },
-  "description": "Istio Control Plane Dashboard version 1.8.6",
+  "description": "Istio Control Plane Dashboard version 1.10.6",
   "editable": false,
   "gnetId": 7645,
   "graphTooltip": 1,
@@ -1142,24 +1142,24 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "pilot_virt_services{app=\"istiod\"}",
+          "expr": "avg(pilot_virt_services{app=\"istiod\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Virtual Services",
           "refId": "A"
         },
         {
-          "expr": "pilot_services{app=\"istiod\"}",
+          "expr": "avg(pilot_services{app=\"istiod\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Services",
           "refId": "B"
         },
         {
-          "expr": "pilot_xds{app=\"istiod\"}",
+          "expr": "sum(pilot_xds{app=\"istiod\"}) by (pod)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "Connected Endpoints",
+          "legendFormat": "Connected Endpoints {{pod}}",
           "refId": "E"
         }
       ],
