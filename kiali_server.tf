@@ -14,7 +14,7 @@ resource "kubernetes_manifest" "kiali_server" {
         "accessible_namespaces" = [
           "**",
         ]
-        "image_name" = "${local.repositories.dockerhub}kiali/kiali"
+        "image_name" = "${local.repositories.quay}kiali/kiali"
         "image_pull_secrets" = [
           "${local.platform_image_pull_secret_name}",
         ]
