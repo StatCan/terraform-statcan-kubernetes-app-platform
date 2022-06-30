@@ -32,8 +32,12 @@ resource "kubernetes_manifest" "kiali_server" {
                   "paths" = [
                     {
                       "backend" = {
-                        "serviceName" = "kiali"
-                        "servicePort" = 20001
+                        "service" = {
+                          "name" = "kiali"
+                          "port" = {
+                            "number" = 20001
+                          }
+                        }
                       }
                       "path" = "/.*"
                       "pathType" = "ImplementationSpecific"

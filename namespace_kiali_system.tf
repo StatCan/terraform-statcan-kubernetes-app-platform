@@ -4,6 +4,7 @@ resource "kubernetes_namespace" "kiali_system" {
 
     labels = {
       "namespace.statcan.gc.ca/purpose" = "system"
+      "network.statcan.gc.ca/allow-ingress-controller" = "true"
     }
   }
 }
