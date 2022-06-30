@@ -36,6 +36,7 @@ resource "kubernetes_manifest" "kiali_server" {
                         "servicePort" = 20001
                       }
                       "path" = "/.*"
+                      "pathType" = "ImplementationSpecific"
                     },
                   ]
                 }
