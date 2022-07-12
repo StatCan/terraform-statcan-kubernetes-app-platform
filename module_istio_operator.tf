@@ -11,7 +11,8 @@ module "istio_operator" {
 
   # The following are variables that can be specified, but come with sane defaults
   namespace        = module.namespace_istio_operator_system.name
-  watch_namespaces = [module.namespace_istio_system.name, module.namespace_ingress_general_system.name]
+  # concatenate user-specified namespaces that IstioOperator should watch
+  watch_namespaces = concat([module.namespace_istio_system.name, module.namespace_ingress_general_system.name], var.istio_operator_additional_watch_namespaces)
 
   # Resolve Istio being oomkilled
   resources = {

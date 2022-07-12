@@ -79,3 +79,8 @@ variable "additional_istio_ingress_gateways" {
 
   default = {}
 }
+variable "istio_operator_additional_watch_namespaces" {
+  description = "Additional namespaces that the IstioOperator should watch."
+  type        = list(string)
+  default     = []
+}
