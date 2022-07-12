@@ -39,7 +39,7 @@ resource "kubernetes_manifest" "kiali_server" {
                           }
                         }
                       }
-                      "path" = "/.*"
+                      "path"     = "/.*"
                       "pathType" = "ImplementationSpecific"
                     },
                   ]

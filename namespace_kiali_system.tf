@@ -3,7 +3,7 @@ resource "kubernetes_namespace" "kiali_system" {
     name = "kiali-system"
 
     labels = {
-      "namespace.statcan.gc.ca/purpose" = "system"
+      "namespace.statcan.gc.ca/purpose"                = "system"
       "network.statcan.gc.ca/allow-ingress-controller" = "true"
     }
   }
