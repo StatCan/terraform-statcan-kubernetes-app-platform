@@ -5,9 +5,6 @@ resource "kubernetes_manifest" "kiali_server" {
     "metadata" = {
       "name"      = "kiali"
       "namespace" = "kiali-system"
-      "finalizers" = [
-        "finalizer.kiali",
-      ]
     }
     "spec" = {
       "deployment" = {
