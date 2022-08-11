@@ -48,7 +48,7 @@ resource "kubernetes_manifest" "kiali_server" {
       }
       "external_services" = {
         "grafana" = {
-          "in_cluster_url" = "http://prometheus-operator-grafana.prometheus-system:80"
+          "in_cluster_url" = "http://kube-prometheus-stack-grafana.prometheus-system:80"
         }
         "istio" = {
           "component_status" = {
@@ -69,7 +69,7 @@ resource "kubernetes_manifest" "kiali_server" {
           "url_service_version" = "http://istiod.istio-system:15010/version"
         }
         "prometheus" = {
-          "url" = "http://prometheus-operator-prometheus.prometheus-system:9090"
+          "url" = "http://kube-prometheus-stack-prometheus.prometheus-system:9090"
         }
         "tracing" = {
           "enabled" = false
