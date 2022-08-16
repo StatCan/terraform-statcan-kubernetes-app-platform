@@ -4,7 +4,7 @@ resource "kubernetes_manifest" "podmonitor_monitoring_envoy_stats_monitor" {
     "kind"       = "PodMonitor"
     "metadata" = {
       "labels" = {
-        "release" = "prometheus-operator"
+        "release" = "kube-prometheus-stack"
       }
       "name"      = "envoy-stats-monitor"
       "namespace" = "prometheus-system"
@@ -81,7 +81,7 @@ resource "kubernetes_manifest" "servicemonitor_monitoring_istio_component_monito
     "kind"       = "ServiceMonitor"
     "metadata" = {
       "labels" = {
-        "release" = "prometheus-operator"
+        "release" = "kube-prometheus-stack"
       }
       "name"      = "istio-component-monitor"
       "namespace" = "prometheus-system"
