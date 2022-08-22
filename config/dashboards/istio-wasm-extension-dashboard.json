@@ -48,7 +48,7 @@
       }
     ]
   },
-  "description": "Istio Wasm Extension Dashboard version 1.10.6",
+  "description": "Istio Wasm Extension Dashboard version 1.12.9",
   "editable": false,
   "gnetId": 13277,
   "graphTooltip": 0,
