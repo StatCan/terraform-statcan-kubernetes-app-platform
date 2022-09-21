@@ -15,7 +15,7 @@ resource "kubernetes_manifest" "kiali_server" {
         "image_pull_secrets" = [
           "${local.platform_image_pull_secret_name}",
         ]
-        "image_version" = "v1.44.0"
+        "image_version" = "v1.50.0"
         "ingress" = {
           "class_name" = "ingress-istio-controller"
           "enabled"    = true
