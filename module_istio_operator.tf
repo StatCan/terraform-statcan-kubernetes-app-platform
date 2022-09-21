@@ -7,7 +7,7 @@ module "istio_operator" {
     module.namespace_istio_system,
   ]
 
-  tag = "1.12.9-distroless"
+  tag = "1.14.3-distroless"
 
   # The following are variables that can be specified, but come with sane defaults
   namespace = module.namespace_istio_operator_system.name
