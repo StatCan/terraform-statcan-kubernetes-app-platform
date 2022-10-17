@@ -43,7 +43,7 @@ certificates:
   # Defaults to /certs.
   certsMountPath: /certs
   # Defines the duration of the certificates validity.
-  duration: 8640h0m0s # 12 months
+  duration: 25920h0m0s # 36 months
   # Defines the amount of time before expiry when the certificate should be renewed.
   renewBefore: 720h0m0s # 30 days
 
