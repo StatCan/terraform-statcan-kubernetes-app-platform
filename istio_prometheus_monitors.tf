@@ -3,11 +3,8 @@ resource "kubernetes_manifest" "podmonitor_monitoring_envoy_stats_monitor" {
     "apiVersion" = "monitoring.coreos.com/v1"
     "kind"       = "PodMonitor"
     "metadata" = {
-      "labels" = {
-        "release" = "kube-prometheus-stack"
-      }
       "name"      = "envoy-stats-monitor"
-      "namespace" = "prometheus-system"
+      "namespace" = kubernetes_namespace.istio_system.id
     }
     "spec" = {
       "jobLabel" = "envoy-stats"
@@ -80,11 +77,8 @@ resource "kubernetes_manifest" "servicemonitor_monitoring_istio_component_monito
     "apiVersion" = "monitoring.coreos.com/v1"
     "kind"       = "ServiceMonitor"
     "metadata" = {
-      "labels" = {
-        "release" = "kube-prometheus-stack"
-      }
       "name"      = "istio-component-monitor"
-      "namespace" = "prometheus-system"
+      "namespace" = kubernetes_namespace.istio_system.id
     }
     "spec" = {
       "endpoints" = [
