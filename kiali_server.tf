@@ -4,7 +4,7 @@ resource "kubernetes_manifest" "kiali_server" {
     "kind"       = "Kiali"
     "metadata" = {
       "name"      = "kiali"
-      "namespace" = "kiali-system"
+      "namespace" = kubernetes_namespace.kiali_system.id
     }
     "spec" = {
       "deployment" = {
@@ -15,93 +15,105 @@ resource "kubernetes_manifest" "kiali_server" {
         "image_pull_secrets" = [
           "${local.platform_image_pull_secret_name}",
         ]
-        "image_version" = "v1.50.0"
+        "image_version" = "operator_version" # Use the operator's version
         "ingress" = {
           "class_name" = "ingress-istio-controller"
           "enabled"    = true
-        }
-        "override_ingress_yaml" = {
-          "spec" = {
-            "rules" = [
-              {
-                "host" = "kiali.${var.ingress_domain}"
-                "http" = {
-                  "paths" = [
-                    {
-                      "backend" = {
-                        "service" = {
-                          "name" = "kiali"
-                          "port" = {
-                            "number" = 20001
+          "override_yaml" = {
+            "spec" = {
+              "rules" = [
+                {
+                  "host" = "kiali.${var.ingress_domain}"
+                  "http" = {
+                    "paths" = [
+                      {
+                        "backend" = {
+                          "service" = {
+                            "name" = "kiali"
+                            "port" = {
+                              "number" = 20001
+                            }
                           }
                         }
-                      }
-                      "path"     = "/.*"
-                      "pathType" = "ImplementationSpecific"
-                    },
-                  ]
-                }
-              },
-            ]
+                        "path"     = "/"
+                        "pathType" = "Prefix"
+                      },
+                    ]
+                  }
+                },
+              ]
+            }
           }
         }
+        # Prevent any changes via the UI.
+        "view_only_mode" = true
       }
       "external_services" = {
-        "grafana" = {
-          "in_cluster_url" = "http://kube-prometheus-stack-grafana.prometheus-system:80"
-        }
+        "grafana" = yamldecode(<<-EOY
+          %{if var.kiali_grafana_configurations != null~}
+          %{if var.kiali_grafana_configurations.token != null~}
+          auth:
+            token: ${var.kiali_grafana_configurations.token}
+            type: Bearer
+          %{endif~}
+          %{if var.kiali_grafana_configurations.in_cluster_url != null~}
+          in_cluster_url: ${var.kiali_grafana_configurations.in_cluster_url}
+          %{endif~}
+          %{if var.kiali_grafana_configurations.url != null~}
+          url: ${var.kiali_grafana_configurations.url}
+          %{endif~}
+          %{endif~}
+          EOY
+        )
         "istio" = {
           "component_status" = {
             "components" = [
               {
                 "app_label" = "istiod"
                 "is_core"   = true
-                "namespace" = "istio-system"
+                "namespace" = kubernetes_namespace.istio_system.id
               },
               {
                 "app_label" = "istio-ingressgateway"
                 "is_core"   = true
-                "namespace" = "ingress-general-system"
+                "namespace" = kubernetes_namespace.istio_system.id
+              },
+              {
+                "app_label" = "istio-ingressgateway"
+                "is_core"   = true
+                "namespace" = kubernetes_namespace.ingress_general_system.id
               },
             ]
             "enabled" = true
           }
-          "url_service_version" = "http://istiod.istio-system:15010/version"
+          "url_service_version" = "http://istiod.${kubernetes_namespace.istio_system.id}:15014/version"
         }
         "prometheus" = {
-          "url" = "http://kube-prometheus-stack-prometheus.prometheus-system:9090"
+          "url" = var.kiali_prometheus_url
         }
         "tracing" = {
           "enabled" = false
         }
       }
-      "istio_component_namespaces" = {
-        "grafana"    = "prometheus-system"
-        "istiod"     = "istio-system"
-        "pilot"      = "istio-system"
-        "prometheus" = "prometheus-system"
-        "tracing"    = "prometheus-system"
-      }
-      "istio_namespace" = "istio-system"
+      "istio_namespace" = kubernetes_namespace.istio_system.id
       "server" = {
         "web_fqdn" = "kiali.${var.ingress_domain}"
       }
     }
   }
-
   computed_fields = ["metadata.finalizers"]
 }
 
 resource "kubernetes_manifest" "destinationrule_kiali_system" {
   manifest = {
-    "apiVersion" = "networking.istio.io/v1alpha3"
+    "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "DestinationRule"
     "metadata" = {
       "name"      = "kiali"
-      "namespace" = "kiali-system"
+      "namespace" = kubernetes_namespace.kiali_system.id
     }
     "spec" = {
-      "host" = "kiali.kiali-system.svc.cluster.local"
+      "host" = "kiali.${kubernetes_namespace.kiali_system.id}.svc.cluster.local"
       "trafficPolicy" = {
         "tls" = {
           "mode" = "DISABLE"

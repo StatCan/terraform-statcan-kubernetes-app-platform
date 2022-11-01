@@ -84,3 +84,24 @@ variable "istio_operator_additional_watch_namespaces" {
   type        = list(string)
   default     = []
 }
+
+# Kiali
+
+variable "kiali_grafana_configurations" {
+  description = "Values for configuring Grafana integration into Kiali."
+  type = object({
+    in_cluster_url = string,
+    url            = string,
+    token          = string,
+  })
+  default = {
+    in_cluster_url = null,
+    url            = null,
+    token          = null,
+  }
+}
+
+variable "kiali_prometheus_url" {
+  description = "The URL to the Prometheus instance that Kiali should use for metrics lookups."
+  type        = string
+}
