@@ -49,22 +49,14 @@ resource "kubernetes_manifest" "kiali_server" {
         "view_only_mode" = true
       }
       "external_services" = {
-        "grafana" = yamldecode(<<-EOY
-          %{if var.kiali_grafana_configurations != null~}
-          %{if var.kiali_grafana_configurations.token != null~}
-          auth:
-            token: ${var.kiali_grafana_configurations.token}
-            type: Bearer
-          %{endif~}
-          %{if var.kiali_grafana_configurations.in_cluster_url != null~}
-          in_cluster_url: ${var.kiali_grafana_configurations.in_cluster_url}
-          %{endif~}
-          %{if var.kiali_grafana_configurations.url != null~}
-          url: ${var.kiali_grafana_configurations.url}
-          %{endif~}
-          %{endif~}
-          EOY
-        )
+        "grafana" = {
+          "auth" = {
+            "token" = var.kiali_grafana_configurations.token != null ? var.kiali_grafana_configurations.token : ""
+            "type"  = "Bearer"
+          }
+          "in_cluster_url" = var.kiali_grafana_configurations.in_cluster_url != null ? var.kiali_grafana_configurations.in_cluster_url : ""
+          "url"            = var.kiali_grafana_configurations.url != null ? var.kiali_grafana_configurations.url : ""
+        }
         "istio" = {
           "component_status" = {
             "components" = [

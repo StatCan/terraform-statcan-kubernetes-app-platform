@@ -95,10 +95,12 @@ variable "kiali_grafana_configurations" {
     token          = string,
   })
   default = {
-    in_cluster_url = null,
-    url            = null,
-    token          = null,
+    in_cluster_url = "",
+    url            = "",
+    token          = "",
   }
+
+  sensitive = true
 }
 
 variable "kiali_prometheus_url" {
