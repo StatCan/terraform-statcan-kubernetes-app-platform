@@ -45,6 +45,7 @@ resource "kubernetes_manifest" "kiali_server" {
             }
           }
         }
+        "resources" = var.kiali_resources
         # Prevent any changes via the UI.
         "view_only_mode" = true
       }
@@ -52,7 +53,7 @@ resource "kubernetes_manifest" "kiali_server" {
         "grafana" = {
           "auth" = {
             "token" = var.kiali_grafana_configurations.token != null ? var.kiali_grafana_configurations.token : ""
-            "type"  = "Bearer"
+            "type"  = "bearer"
           }
           "in_cluster_url" = var.kiali_grafana_configurations.in_cluster_url != null ? var.kiali_grafana_configurations.in_cluster_url : ""
           "url"            = var.kiali_grafana_configurations.url != null ? var.kiali_grafana_configurations.url : ""
