@@ -112,17 +112,36 @@ variable "kiali_prometheus_url" {
 variable "kiali_resources" {
   description = "The limits and requests to set on the Kiali pod."
   type = object({
-    limits   = optional(object({}), {}),
-    requests = optional(object({}), {}),
+    limits = optional(object({
+      cpu    = optional(string, "50m"),
+      memory = optional(string, "256Mi"),
+      }), {
+      cpu    = "50m",
+      memory = "256Mi",
+    }),
+    requests = optional(object({
+      cpu    = optional(string, "10m"),
+      memory = optional(string, "128Mi"),
+      }), {
+      cpu    = "10m",
+      memory = "128Mi",
+    }),
   })
-  default = {
-    limits   = {},
-    requests = {},
-  }
+  default  = {}
   nullable = false
 
   validation {
     condition     = var.kiali_resources.limits != null && var.kiali_resources.requests != null
     error_message = "Limits and requests cannot be null."
+  }
+
+  validation {
+    condition     = var.kiali_resources.limits.cpu != null && var.kiali_resources.limits.memory != null
+    error_message = "CPU and memory limits cannot be null."
+  }
+
+  validation {
+    condition     = var.kiali_resources.requests.cpu != null && var.kiali_resources.requests.memory != null
+    error_message = "CPU and memory requests cannot be null."
   }
 }
