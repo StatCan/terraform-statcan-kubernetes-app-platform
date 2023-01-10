@@ -44,6 +44,11 @@ components:
 meshConfig:
   enableAutoMtls: true
   ingressControllerMode: 'OFF'
+  enableTracing: ${var.meshconfig_enable_tracing}
+  defaultConfig:
+    tracing:
+      zipkin:
+        address: ${var.meshconfig_zipkin_address}
 profile: default
 values:
   global:
