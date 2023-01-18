@@ -18,7 +18,7 @@ resource "helm_release" "ingress_istio_controller" {
    repository: ${local.repositories.dockerhub}statcan/ingress-istio-controller
    pullPolicy: IfNotPresent
    # Overrides the image tag whose default is the chart appVersion.
-   tag: "v1.3.1"
+   tag: "v1.3.2"
  # These values determine the settings that can be passed to the controller.
  # If values are left empty, defaults in the image will be used.
  # Please see github.com/statcan/ingress-istio-controller for defaults.
