@@ -59,7 +59,7 @@ https:
     secretName: "${each.value.certificate_secret_name}"
     # Defines list of DNS names for the certificate.
     # Note: The first entry is set as the common name.
-    dnsNames: ["*.${var.ingress_domain}"]
+    dnsNames: ${jsonencode(each.value.hosts)}
     # Toggles if the Azure DNS solver should be used.
     useAzureDNSSolver: true
     # Defines the type of Issuer to use.
