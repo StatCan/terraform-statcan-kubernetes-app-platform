@@ -21,7 +21,7 @@ resource "helm_release" "helm_argo_controller" {
 replicaCount: 1
 
 image:
-  repository: "${local.repositories.aaw}/argo-controller"
+  repository: "${local.repositories.aaw}argo-controller"
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "6f621aaca104adc650d6e8092b747f8e6f4f5e13"
