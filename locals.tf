@@ -3,6 +3,7 @@ locals {
 
   # Must contain trailing slash
   repositories = {
+    aaw       = lookup(var.platform_image_bases, "aaw", "k8scc01covidacr.azurecr.io/")
     dockerhub = lookup(var.platform_image_bases, "dockerhub", "docker.io/")
     mcr       = lookup(var.platform_image_bases, "mcr", "mcr.microsoft.com/")
     quay      = lookup(var.platform_image_bases, "quay", "quay.io/")
