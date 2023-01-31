@@ -2,6 +2,11 @@ variable "cluster_name" {
   description = "Name of the cluster"
 }
 
+variable "tenant_id" {
+  description = "The directory tenant that you want to request permission from."
+  default     = ""
+}
+
 variable "ci_service_account_name" {
   default     = "ci"
   description = "Name of the CI service account."
@@ -165,4 +170,26 @@ variable "meshconfig_enable_tracing" {
   description = "Flag to control generation of trace spans and request IDs."
   default     = false
   type        = bool
+}
+
+# Argo Workflows
+
+variable "argo_workflows_client_id" {
+  description = "The Client ID for Argo Workflows"
+}
+
+variable "argo_workflows_client_secret" {
+  description = "The Client Secret for Argo Workflows"
+}
+
+variable "platform_workflows_storage_account_name" {
+  description = "The name of the workflows storage account."
+}
+
+variable "platform_workflows_primary_access_key" {
+  description = "The primary access key of the workflows storage account."
+}
+
+variable "platform_workflows_primary_blob_endpoint" {
+  description = "The primary blob endpoint of the workflows storage account."
 }
