@@ -5,7 +5,7 @@ resource "kubernetes_namespace" "argo_controller_system" {
     labels = {
       "namespace.statcan.gc.ca/purpose"                = "system"
       "network.statcan.gc.ca/allow-ingress-controller" = "true"
-      "istio-injection"                                = "disabled"
+      "istio-injection"                                = "enabled"
     }
   }
 }

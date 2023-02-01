@@ -43,19 +43,19 @@ images:
 
 controller:
   image:
-    registry: ${local.repositories.quay}
+    registry: ${trimsuffix(local.repositories.quay, "/")}
     repository: argoproj/workflow-controller
     tag: v3.4.4
 
 executor:
   image:
-    registry: ${local.repositories.quay}
+    registry: ${trimsuffix(local.repositories.quay, "/")}
     repository: argoproj/argoexec
     tag: v3.4.4
 
 server:
   image:
-    registry: ${local.repositories.quay}
+    registry: ${trimsuffix(local.repositories.quay, "/")}
     repository: argoproj/argocli
     tag: v3.4.4
   extraArgs:
