@@ -10,7 +10,7 @@ resource "helm_release" "ingress_istio_controller" {
   repository_password = var.platform_helm_repository_password
 
   chart   = "ingress-istio-controller"
-  version = "1.2.1"
+  version = "1.2.3"
 
   values = [
     <<EOF
