@@ -79,15 +79,17 @@ variable "additional_istio_ingress_gateways" {
   type = map(object({
     hosts                   = list(string)
     certificate_secret_name = string
+    dns_names               = list(string)
   }))
 
   description = <<-EOD
   A map of objects which specify the configurations of addditional Istio Ingress Gateways to create.
 
-  The key into the map is the name of the Ingress gateway and value is the following object:
+  The key into the map is the name of the Istio Ingress Gateway and the value is the following object:
   additional_istio_ingress_gateway {
-    hosts                   : "A list of Fully Qualified Domain Names, which will also be used as the DNS Names"
+    hosts                   : "A list of hosts specified on the Istio Ingress Gateway"
     certificate_secret_name : "The name of the TLS Secret to be created by cert-manager"
+    dns_names               : "A list of Fully Qualified Domain Names used as Subject Alternate Names in the Certificate. The first is also used as the Common Name."
   }
   EOD
 
