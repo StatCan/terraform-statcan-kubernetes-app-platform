@@ -118,3 +118,78 @@ artifactRepository:
       key: root-password
 EOF
 }
+
+# Argo Workflows for Default Service Account
+
+resource "kubernetes_service_account" "argo_workflows_default" {
+  metadata {
+    name      = "user-default-login"
+    namespace = "argo-workflows-system"
+
+    annotations = {
+      "workflows.argoproj.io/rbac-rule"            = "true"
+      "workflows.argoproj.io/rbac-rule-precedence" = "0"
+    }
+  }
+}
+
+resource "kubernetes_cluster_role" "argo_workflows_namespace" {
+  metadata {
+    name = "argo-workflows-namespace"
+  }
+
+  rule {
+    api_groups = ["argoproj.io"]
+    resources = [
+      "eventsources",
+      "eventsources/finalizers",
+      "sensors",
+      "sensors/finalizers",
+      "workflows",
+      "workflows/finalizers",
+      "workfloweventbindings",
+      "workfloweventbindings/finalizers",
+      "workflowtemplates",
+      "workflowtemplates/finalizers",
+      "cronworkflows",
+      "cronworkflows/finalizers",
+      "clusterworkflowtemplates",
+      "clusterworkflowtemplates/finalizers"
+    ]
+    verbs = [
+      "create",
+      "delete",
+      "deletecollection",
+      "get",
+      "list",
+      "patch",
+      "update",
+      "watch"
+    ]
+  }
+
+  rule {
+    api_groups     = [""]
+    resources      = ["secrets"]
+    verbs          = ["get"]
+    resource_names = ["argo-workflows-azure-blob-storage"]
+  }
+}
+
+resource "kubernetes_cluster_role" "argo_workflows_workflow" {
+  metadata {
+    name = "argo-workflows-workflow"
+  }
+
+  rule {
+    api_groups = [""]
+    resources  = ["pods"]
+    verbs      = ["get", "watch", "patch"]
+  }
+
+  rule {
+    api_groups = [""]
+    resources  = ["pods/log"]
+    verbs      = ["get", "watch"]
+  }
+}
