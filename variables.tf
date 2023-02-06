@@ -37,19 +37,27 @@ variable "platform_image_repository" {
 }
 
 variable "platform_image_repository_username" {
-  default = ""
+  default     = ""
+  description = "The username for the repository where the image is stored"
+  sensitive   = true
 }
 
 variable "platform_image_repository_password" {
-  default = ""
+  default     = ""
+  description = "The password for the repository where the image is stored"
+  sensitive   = true
 }
 
 variable "platform_image_repository_email" {
-  default = ""
+  default     = ""
+  description = "The email for the repository where the image is stored"
+  sensitive   = true
 }
 
 variable "platform_image_repository_auth" {
-  default = ""
+  default     = ""
+  description = "The auth token used to authenticate to a private image registry."
+  sensitive   = true
 }
 
 variable "platform_helm_repositories" {
@@ -63,11 +71,15 @@ variable "platform_helm_repositories" {
 }
 
 variable "platform_helm_repository_username" {
-  default = ""
+  default     = ""
+  description = "The username of the repository where the Helm chart is stored"
+  sensitive   = true
 }
 
 variable "platform_helm_repository_password" {
-  default = ""
+  default     = ""
+  description = "The password of the repository where the Helm chart is stored"
+  sensitive   = true
 }
 
 variable "load_balancer_subnet" {
@@ -178,10 +190,12 @@ variable "meshconfig_enable_tracing" {
 
 variable "argo_workflows_client_id" {
   description = "The Client ID for Argo Workflows"
+  sensitive   = true
 }
 
 variable "argo_workflows_client_secret" {
   description = "The Client Secret for Argo Workflows"
+  sensitive   = true
 }
 
 variable "platform_workflows_storage_account_name" {
@@ -190,6 +204,7 @@ variable "platform_workflows_storage_account_name" {
 
 variable "platform_workflows_primary_access_key" {
   description = "The primary access key of the workflows storage account."
+  sensitive   = true
 }
 
 variable "platform_workflows_primary_blob_endpoint" {
