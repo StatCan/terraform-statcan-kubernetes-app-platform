@@ -1,7 +1,7 @@
 module "helm_kiali_operator" {
   source = "git::https://github.com/canada-ca-terraform-modules/terraform-kubernetes-kiali-operator.git?ref=v0.0.1"
 
-  chart_version = "1.50.0"
+  chart_version = "1.62.0"
   depends_on = [
     module.namespace_kiali_system,
   ]
