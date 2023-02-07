@@ -1,4 +1,3 @@
-
 # Deploys a Mutating Admissions Controller that changes Gateway references in VirtualServices from one to another.
 # This is a requirement since Gateways are directly referenced by end-users and a deployment of a new Gateway breaks exsisting functionality.
 # As part of the update to Istio 1.6, the Gateway used for our ingress gateway was no longer able to be used and required that

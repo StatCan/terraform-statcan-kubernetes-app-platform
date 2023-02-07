@@ -1,13 +1,13 @@
 # Deploys the Istio Operator controller along with the IstioOperator CRD.
 module "istio_operator" {
-  source = "git::https://github.com/canada-ca-terraform-modules/terraform-kubernetes-istio-operator.git?ref=v2.5.0"
+  source = "git::https://github.com/canada-ca-terraform-modules/terraform-kubernetes-istio-operator.git?ref=v2.6.0"
 
   depends_on = [
     module.namespace_istio_operator_system,
     module.namespace_istio_system,
   ]
 
-  tag = "1.14.3-distroless"
+  tag = "1.16.1-distroless"
 
   # The following are variables that can be specified, but come with sane defaults
   namespace = module.namespace_istio_operator_system.name
