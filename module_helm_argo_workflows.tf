@@ -46,6 +46,14 @@ controller:
     registry: ${trimsuffix(local.repositories.quay, "/")}
     repository: argoproj/workflow-controller
     tag: v3.4.4
+  workflowDefaults:
+    spec:
+      activeDeadlineSeconds: 28800
+      ttlStrategy:
+        secondsAfterSuccess: 86400
+        secondsAfterFailure: 172800
+      podGC:
+        strategy: OnPodCompletion
 
 executor:
   image:
