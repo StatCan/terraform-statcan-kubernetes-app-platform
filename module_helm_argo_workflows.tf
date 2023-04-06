@@ -49,9 +49,6 @@ controller:
   workflowDefaults:
     spec:
       activeDeadlineSeconds: 28800
-      ttlStrategy:
-        secondsAfterSuccess: 86400
-        secondsAfterFailure: 172800
       podGC:
         strategy: OnPodCompletion
 
