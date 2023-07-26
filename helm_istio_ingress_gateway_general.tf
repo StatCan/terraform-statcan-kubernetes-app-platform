@@ -13,7 +13,7 @@ resource "helm_release" "istio_ingress_gateway_general" {
   repository_password = var.platform_helm_repository_password
 
   chart   = "istio-ingress-gateway"
-  version = "2.5.5"
+  version = "2.6.0"
 
   values = [<<EOF
 # Sets the tag of the images to use
@@ -64,6 +64,11 @@ https:
       kind: ClusterIssuer
       # The name of the Issuer to use.
       name: issuer-letsencrypt
+# Configures Telemetry on the ingress gateway.
+telemetry:
+  # Enable access logging
+  accessLogging:
+    enabled: true
 EOF
   ]
 }
