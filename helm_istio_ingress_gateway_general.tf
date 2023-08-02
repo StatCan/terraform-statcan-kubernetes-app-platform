@@ -69,6 +69,7 @@ telemetry:
   # Enable access logging
   accessLogging:
     enabled: true
+
 EOF
   ]
 }
