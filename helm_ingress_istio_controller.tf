@@ -10,15 +10,13 @@ resource "helm_release" "ingress_istio_controller" {
   repository_password = var.platform_helm_repository_password
 
   chart   = "ingress-istio-controller"
-  version = "1.2.3"
+  version = "1.3.0"
 
   values = [
     <<EOF
  image:
    repository: ${local.repositories.dockerhub}statcan/ingress-istio-controller
    pullPolicy: IfNotPresent
-   # Overrides the image tag whose default is the chart appVersion.
-   tag: "v1.3.2"
  # These values determine the settings that can be passed to the controller.
  # If values are left empty, defaults in the image will be used.
  # Please see github.com/statcan/ingress-istio-controller for defaults.
